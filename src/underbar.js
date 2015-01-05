@@ -102,7 +102,17 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-      return _.filter(collection, !(test));
+      var inverseTest = function(test) {
+	  return function(item) {
+	      if (!test(item)) {
+		  return true;
+	      } else {
+		  return false;
+	      }
+	  }
+      };
+
+      return _.filter(collection, inverseTest(test));
   };
 
   // Produce a duplicate-free version of the array.
