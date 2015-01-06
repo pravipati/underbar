@@ -323,19 +323,24 @@
   // same thing as once, but based on many sets of unique arguments.
   //
   // _.memoize should return a function that, when called, will check if it has
-  // already computed the result for the given argument and return that value
+   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
       var alreadyComputed = {};
       var result;
 
       return function() {
-	  if (String(arguments) in alreadyComputed) {
-	      result = alreadyComputed[String(arguments)];
+	  //Going to refactor how arguments are converted into keys in alreadyComputed
+	  var argString = "";
+	  for (var i = 0; i < arguments.length; i++) {
+	      argString += arguments[i] + " ";
+	  }
+	  if (argString in alreadyComputed) {
+	      result = alreadyComputed[argString];
 	  }
 	  else {
 	      result = func.apply(this, arguments);
-	      alreadyComputed[String(arguments)] = result;
+	      alreadyComputed[argString] = result;
 	  }
 	  return result;
       };	  
