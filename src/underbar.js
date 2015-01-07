@@ -330,11 +330,10 @@
       var result;
 
       return function() {
-	  //Going to refactor how arguments are converted into keys in alreadyComputed
-	  var argString = "";
-	  for (var i = 0; i < arguments.length; i++) {
-	      argString += arguments[i] + " ";
-	  }
+	  // turns the arguments object into a string which we will use for a key
+	  // in alreadyComputed
+	  var argString = String(Array.prototype.slice.call(arguments));
+
 	  if (argString in alreadyComputed) {
 	      result = alreadyComputed[argString];
 	  }
@@ -352,7 +351,7 @@
   // The arguments for the original function are passed after the wait
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
-  _.delay = function(func, wait) {
+  _.delay = function(func, wait){
   };
 
 
