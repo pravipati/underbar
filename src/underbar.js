@@ -61,7 +61,7 @@
 	      iterator(collection[i], i, collection);
 	  }
       }
-      else {
+      else { 
 	  for (var key in collection) {
 	      iterator(collection[key], key, collection);
 	  }
@@ -373,12 +373,12 @@
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
       var randomized = [];
-      var elements = [];
+      var movedElements = [];
       while (randomized.length < array.length) {
 	  var e = Math.round(Math.random() * (array.length - 1));
-	  if (_.indexOf(elements, e) == -1) {
+	  if (_.indexOf(movedElements, e) == -1) {
 	      randomized.push(array[e]);
-	      elements.push(e);
+	      movedElements.push(e);
 	  }
       }
       return randomized;
@@ -396,6 +396,7 @@
   // Calls the method named by functionOrKey on each value in the list.
   // Note: You will need to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+      return functionOrKey.apply(this, collection)
   };
 
   // Sort the object's values by a criterion produced by an iterator.
